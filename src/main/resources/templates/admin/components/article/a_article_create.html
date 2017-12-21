@@ -1,0 +1,84 @@
+<div class="container" ng-controller="ArticleCreateCtrl">
+    <div class="row">
+        <h1>Новая статья</h1>
+        <p>Введите данные для добавления новой статьи:</p>
+    </div>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#ru" target="_self">RU</a></li>
+        <li><a data-toggle="tab" data-target="#ua" target="_self">UA</a></li>
+    </ul>
+
+    <div class="tab-content" style="margin-bottom: 70px">
+        <div id="ru" class="tab-pane fade in active">
+            <form name="ruForm">
+                <div class="form-group" ng-class="{ 'has-error' : ruForm.title.$invalid &amp;&amp; validated }">
+                    <label>Заголовок:</label>
+                    <input ng-model="article.title.ru"
+                           name="title" type="text" class="form-control"
+                           maxlength="200" required=""/>
+                    <p ng-show="ruForm.title.$invalid &amp;&amp; validated" class="help-block">Введите название статьи.</p>
+                </div>
+                <div class="form-group">
+                    <label>Содержание:</label>
+                    <summernote ng-model="article.text.ru" height="260"></summernote>
+                </div>
+            </form>
+        </div>
+        <div id="ua" class="tab-pane fade">
+            <form>
+                <div class="form-group">
+                    <label>Заголовок:</label>
+                    <input ng-model="article.title.ua" type="text" class="form-control" maxlength="200"/>
+                </div>
+                <div class="form-group">
+                    <label>Содержание:</label>
+                    <summernote ng-model="article.text.ua" height="260"></summernote>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--navbar-bottom-->
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" role="button">Новая статья</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="saved">
+                    <form action="#!a_article_list">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Сохранено, вернуться к списку статей.
+                        </button>
+                    </form>
+                </li>
+                <li ng-show="notSaved">
+                    <button class="btn btn-danger" ng-click="notSaved=false;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        При сохранении произошла ошибка.
+                    </button>
+                </li>
+                <li>
+                    <button ng-show="saving" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Сохранение...
+                    </button>
+                </li>
+                <li>
+                    <form action="#!a_article_list">
+                        <button ng-hide="saved" class="btn btn-default">
+                            Отмена
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <button ng-click="saveArticle()" class="btn btn-primary">
+                        Сохранить
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
