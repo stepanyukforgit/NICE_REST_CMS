@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{css/style_admin.css}" href="../../static/css/style_admin.css"/>
+    <link rel="stylesheet" th:href="@{http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css}" href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"/>
+
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js}" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js}" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+    <script type="text/javascript" th:src="@{js/app/nicewoodApp.js}" src="../static/js/app/nicewoodApp.js"></script>
+
+    <script type="text/javascript" th:src="@{js/app/components/admin/article/article.module.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/article/article-list.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/article/article-create.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/article/article-edit.controller.js}"></script>
+
+</head>
+<body ng-app="nicewoodApp">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}" href="/home">Nicewood</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/admin}" href="/admin">Admin</a></li>
+            <li class="dropdown"><a role="button" class="dropdown-toggle" data-toggle="dropdown">Общие<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#!a_article_list">Статьи</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a role="button" class="dropdown-toggle" data-toggle="dropdown">Каталог<span class="caret"></span></a>
+            </li>
+            <li><a href="#!second">Page 3</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-default btn-sm" style="margin: 10px">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div ng-view="" style="margin-top: 50px"></div>
+
+<!-- Modal Loading -->
+<div id="loadingPage" class="modal fade" role="dialog" style="position: relative;">
+    <div class="modal-dialog">
+        <div style="text-align: -webkit-center;">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js}" src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.min.js}" src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.min.js"></script>
+</body>
+</html>
