@@ -2,6 +2,7 @@ package aleksey.stepanyuk.service;
 
 import aleksey.stepanyuk.domain.entity.Manufacturer;
 import aleksey.stepanyuk.domain.repo.ManufacturerRepository;
+import aleksey.stepanyuk.service.dto.ManufForListDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
