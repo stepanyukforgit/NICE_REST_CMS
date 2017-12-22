@@ -27,6 +27,11 @@
     <script type="text/javascript" th:src="@{js/app/components/admin/article/article-create.controller.js}"></script>
     <script type="text/javascript" th:src="@{js/app/components/admin/article/article-edit.controller.js}"></script>
 
+    <script type="text/javascript" th:src="@{js/app/components/admin/manufacturer/manufacturer.module.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/manufacturer/manufacturer-list.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/manufacturer/manufacturer-create.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/manufacturer/manufacturer-edit.controller.js}"></script>
+
 </head>
 <body ng-app="niceApp">
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,6 +48,9 @@
                 </ul>
             </li>
             <li class="dropdown"><a role="button" class="dropdown-toggle" data-toggle="dropdown">Каталог<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#!a_manufacturer_list">Производители</a></li>
+                </ul>
             </li>
             <li><a href="#!second">Page 3</a></li>
         </ul>

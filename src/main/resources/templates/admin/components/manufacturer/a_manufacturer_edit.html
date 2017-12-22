@@ -1,0 +1,141 @@
+<div class="container" ng-controller="ManufacturerEditCtrl">
+    <div class="row">
+        <h1>Редактирование производителя</h1>
+        <p>Введите данные для редактирования производителя:</p>
+    </div>
+<!--todo multilang musn't be hardcoded in html-->
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#ru" target="_self">RU</a></li>
+        <li><a data-toggle="tab" href="#ua" target="_self">UA</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="ru" class="tab-pane fade in active">
+            <form name="ruForm">
+                <div class="form-group" ng-class="{ 'has-error' : ruForm.name.$invalid &amp;&amp; validated }">
+                    <label>Название:</label>
+                    <input ng-model="manufacturer.name.ru"
+                           name="name" type="text" class="form-control"
+                           maxlength="100" required=""/>
+                    <p ng-show="ruForm.name.$invalid &amp;&amp; validated" class="help-block">Введите название производителя.</p>
+                </div>
+                <div class="form-group">
+                    <label>Описание:</label>
+                    <summernote ng-model="manufacturer.description.ru" height="260"></summernote>
+                </div>
+            </form>
+        </div>
+        <div id="ua" class="tab-pane fade">
+            <form>
+                <div class="form-group">
+                    <label>Название:</label>
+                    <input ng-model="manufacturer.name.ua" type="text" class="form-control" maxlength="100"/>
+                </div>
+                <div class="form-group">
+                    <label>Описание:</label>
+                    <summernote ng-model="manufacturer.description.ua" height="260"></summernote>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <label>Логотип:</label>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 70px">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <p style="font-size: 20px">
+                <span class="label label-default">
+                    Текущий логотип:
+                </span>
+            </p>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div ng-hide="manufacturer.photo.id"
+                 style="background-image: url(img/noimagefound.jpeg);"
+                 class="thumbnail">
+            </div>
+
+            <div ng-show="manufacturer.photo.id"
+                 ng-style="photoPrevLinkStyle"
+                 class="thumbnail">
+
+                <button type="button" class="btn btn-danger pull-right"
+                        ng-click="remove()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <label class="btn btn-primary btn-file">
+                Добавить новый...
+                <input type="file" nice-files="filesToUpload" accept="image/*" style="display: none;"/>
+            </label>
+            <p ng-show="filesToUpload[0]">Size: {{filesToUpload[0].size}} bytes</p>
+            <p ng-show="filesToUpload[0]">Name: {{filesToUpload[0].name}}</p>
+        </div>
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div ng-hide="filesToUpload[0]"
+                 style="background-image: url(img/noimagefound.jpeg);"
+                 class="thumbnail">
+            </div>
+
+            <div ng-show="filesToUpload[0]"
+                 ng-style="{'background-image' : 'url('+filesToUpload[0].url+')'}"
+                 class="thumbnail">
+
+                <button type="button" class="btn btn-danger pull-right"
+                        ng-click="reset()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--navbar-bottom-->
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" role="button">Редактирование производителя</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="saved">
+                    <form action="#!a_manufacturer_list">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Сохранено, вернуться к списку производителей.
+                        </button>
+                    </form>
+                </li>
+                <li ng-show="notSaved">
+                    <button class="btn btn-danger" ng-click="notSaved=false;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        При сохранении произошла ошибка.
+                    </button>
+                </li>
+                <li>
+                    <button ng-show="saving" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Сохранение...
+                    </button>
+                </li>
+                <li>
+                    <form action="#!a_manufacturer_list">
+                        <button class="btn btn-default">
+                            Отмена
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <button ng-click="save()" class="btn btn-primary">
+                        Сохранить
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

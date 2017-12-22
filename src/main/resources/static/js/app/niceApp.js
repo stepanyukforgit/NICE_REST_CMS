@@ -1,5 +1,6 @@
 angular.module('niceApp', [
     'ngRoute',
     'shopinfo',
-    'article'
+    'article',
+    'manufacturer'
 ]);
