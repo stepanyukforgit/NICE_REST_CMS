@@ -1,4 +1,5 @@
-angular.module('nicewoodApp', [
+angular.module('niceApp', [
     'ngRoute',
+    'shopinfo',
     'article'
 ]);

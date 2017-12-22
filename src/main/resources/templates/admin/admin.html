@@ -15,7 +15,12 @@
     <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js}" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js}" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
-    <script type="text/javascript" th:src="@{js/app/nicewoodApp.js}" src="../static/js/app/nicewoodApp.js"></script>
+    <script type="text/javascript" th:src="@{js/app/niceApp.js}" src="../static/js/app/niceApp.js"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/shared/directive/nice-files.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/shared/service/files-uploader-service.js}"></script>
+
+    <script type="text/javascript" th:src="@{js/app/components/admin/shopinfo/shopinfo.module.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/shopinfo/shopinfo.controller.js}"></script>
 
     <script type="text/javascript" th:src="@{js/app/components/admin/article/article.module.js}"></script>
     <script type="text/javascript" th:src="@{js/app/components/admin/article/article-list.controller.js}"></script>
@@ -23,16 +28,17 @@
     <script type="text/javascript" th:src="@{js/app/components/admin/article/article-edit.controller.js}"></script>
 
 </head>
-<body ng-app="nicewoodApp">
+<body ng-app="niceApp">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" th:href="@{/home}" href="/home">Nicewood</a>
+            <a class="navbar-brand" th:href="@{/home}" href="/home">NiceRestCms</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a th:href="@{/admin}" href="/admin">Admin</a></li>
             <li class="dropdown"><a role="button" class="dropdown-toggle" data-toggle="dropdown">Общие<span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                    <li><a href="#!a_shopinfo">Общая информация</a></li>
                     <li><a href="#!a_article_list">Статьи</a></li>
                 </ul>
             </li>

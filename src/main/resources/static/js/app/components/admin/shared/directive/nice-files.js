@@ -1,9 +1,9 @@
-angular.module('nicewoodApp')
-    .directive('nwFiles', ['$parse', function ($parse) {
+angular.module('niceApp')
+    .directive('niceFiles', ['$parse', function ($parse) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                var model = $parse(attrs.nwFiles);
+                var model = $parse(attrs.niceFiles);
                 var modelSetter = model.assign;
                 element.bind('change', function () {
                     var values = [];

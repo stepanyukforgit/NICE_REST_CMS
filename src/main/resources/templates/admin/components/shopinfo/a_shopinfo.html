@@ -1,0 +1,120 @@
+<div class="container" ng-controller="ShopinfoCtrl" >
+
+    <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <h1>Общая информация</h1>
+            <p>Введите данные по разделам:</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm" style="margin-top: 20%">
+                Очистить всё&nbsp;<span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#ru" target="_self">RU</a></li>
+        <li><a data-toggle="tab" href="#ua" target="_self">UK</a></li>
+    </ul>
+
+    <div class="tab-content" style="margin-bottom: 70px">
+        <div id="ru" class="tab-pane fade in active">
+            <form>
+                <div class="form-group">
+                    <label>О нас:</label>
+                    <summernote ng-model="shopinfo.about.ru" height="260"></summernote>
+                </div>
+                <div class="form-group">
+                    <label>Рассрочка и кредит:</label>
+                    <summernote ng-model="shopinfo.payment.ru" height="260"></summernote>
+                </div>
+                <div class="form-group">
+                    <label>Контакты:</label>
+                    <summernote ng-model="shopinfo.contactInfo.ru" height="260"></summernote>
+                </div>
+            </form>
+        </div>
+        <div id="ua" class="tab-pane fade">
+            <form>
+                <div class="form-group">
+                    <label>О нас:</label>
+                    <summernote ng-model="shopinfo.about.ua" height="260"></summernote>
+                </div>
+                <div class="form-group">
+                    <label>Рассрочка и кредит:</label>
+                    <summernote ng-model="shopinfo.payment.ua" height="260"></summernote>
+                </div>
+                <div class="form-group">
+                    <label>Контакты:</label>
+                    <summernote ng-model="shopinfo.contactInfo.ua" height="260"></summernote>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--navbar-bottom-->
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" role="button">Общая информация</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="saved">
+                    <form action="#">
+                        <button class="btn btn-success" ng-click="saved=false;">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Сохранение прошло успешно.
+                        </button>
+                    </form>
+                </li>
+                <li ng-show="notSaved">
+                    <button class="btn btn-danger" ng-click="notSaved=false;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        При сохранении произошла ошибка.
+                    </button>
+                </li>
+                <li>
+                    <button ng-show="saving" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Сохранение...
+                    </button>
+                </li>
+                <li>
+                    <form action="#">
+                        <button ng-hide="saved" class="btn btn-default">
+                            Отмена
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <button ng-click="saveShopinfo()" class="btn btn-primary">
+                        Сохранить
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Modal -->
+    <div id="confirm" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Вы уверены?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Вся информация будет удалена.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="removeShopinfo()" class="btn btn-danger pull-left" data-dismiss="modal">
+                        Удалить
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Отменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

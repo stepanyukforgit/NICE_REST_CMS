@@ -1,4 +1,4 @@
-angular.module('nicewoodApp')
+angular.module('niceApp')
     .service('filesUploaderService', function ($http) {
 
         this.uploadFileToUrl = function (files, uploadUrl) {
