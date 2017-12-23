@@ -32,6 +32,11 @@
     <script type="text/javascript" th:src="@{js/app/components/admin/manufacturer/manufacturer-create.controller.js}"></script>
     <script type="text/javascript" th:src="@{js/app/components/admin/manufacturer/manufacturer-edit.controller.js}"></script>
 
+    <script type="text/javascript" th:src="@{js/app/components/admin/carrier/carrier.module.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/carrier/carrier-list.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/carrier/carrier-create.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/carrier/carrier-edit.controller.js}"></script>
+
 </head>
 <body ng-app="niceApp">
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -45,6 +50,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="#!a_shopinfo">Общая информация</a></li>
                     <li><a href="#!a_article_list">Статьи</a></li>
+                    <li><a href="#!a_carrier_list">Перевозчики</a></li>
                 </ul>
             </li>
             <li class="dropdown"><a role="button" class="dropdown-toggle" data-toggle="dropdown">Каталог<span class="caret"></span></a>
