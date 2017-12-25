@@ -3,5 +3,6 @@ angular.module('niceApp', [
     'shopinfo',
     'article',
     'manufacturer',
-    'carrier'
+    'carrier',
+    'product-category'
 ]);

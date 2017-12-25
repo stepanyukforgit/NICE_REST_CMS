@@ -1,0 +1,147 @@
+<div class="container" ng-controller="ProductCategoryCtrl">
+    <div class="row">
+        <h1>Новая категория продуктов</h1>
+        <p>Введите данные для добавления новой категории продуктов:</p>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#ru" target="_self">RU</a></li>
+                <li><a data-toggle="tab" href="#ua" target="_self">UA</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="ru" class="tab-pane fade in active">
+                    <form name="ruForm">
+                        <div class="form-group" ng-class="{ 'has-error' : ruForm.name.$invalid &amp;&amp; validated }">
+                            <label>Название:</label>
+                            <input ng-model="productCategory.name.ru"
+                                   name="name" type="text" class="form-control"
+                                   maxlength="50" required=""/>
+                            <p ng-show="ruForm.name.$invalid &amp;&amp; validated" class="help-block">Введите название категории продуктов.</p>
+                        </div>
+                    </form>
+                </div>
+                <div id="ua" class="tab-pane fade">
+                    <form>
+                        <div class="form-group">
+                            <label>Название:</label>
+                            <input ng-model="productCategory.name.ua" type="text" class="form-control" maxlength="50"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-left: 1px dashed">
+            <div class="row">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <label>Фото:</label>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 70px">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <label class="btn btn-primary btn-file">
+                        Добавить фото...
+                        <input type="file" nice-files="fileToUpload" accept="image/*" style="display: none;"/>
+                    </label>
+                    <p ng-show="fileToUpload[0]">Size: {{fileToUpload[0].size}} bytes</p>
+                    <p ng-show="fileToUpload[0]">Name: {{fileToUpload[0].name}}</p>
+                </div>
+
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <div ng-hide="fileToUpload[0]"
+                         style="background-image: url(img/noimagefound.jpeg);"
+                         class="thumbnail">
+                    </div>
+
+                    <div ng-show="fileToUpload[0]"
+                         ng-style="{'background-image' : 'url('+fileToUpload[0].url+')'}"
+                         class="thumbnail">
+
+                        <button type="button" class="btn btn-danger pull-right"
+                                ng-click="reset(fileToUpload, 0)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <label>Баннер:</label>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 70px">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <label class="btn btn-primary btn-file">
+                Добавить фото...
+                <input type="file" nice-files="filesToUpload" accept="image/*" multiple="multiple" style="display: none;"/>
+            </label>
+            <p ng-show="filesToUpload[0]">Size: {{filesToUpload[0].size}} bytes</p>
+        </div>
+
+        <div ng-repeat="photo in filesToUpload" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div ng-hide="filesToUpload[0]"
+                 style="background-image: url(img/noimagefound.jpeg);"
+                 class="thumbnail">
+            </div>
+
+            <div ng-show="filesToUpload[0]"
+                 ng-style="{'background-image' : 'url('+photo.url+')'}"
+                 class="thumbnail">
+
+                <button type="button" class="btn btn-danger pull-right"
+                        ng-click="reset(filesToUpload, $index)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--navbar-bottom-->
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" role="button">Новая категория продуктов</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="saved">
+                    <form action="#!a_product_category_list">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Сохранено, вернуться к списку категорий продуктов.
+                        </button>
+                    </form>
+                </li>
+                <li ng-show="notSaved">
+                    <button class="btn btn-danger" ng-click="notSaved=false;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        При сохранении произошла ошибка.
+                    </button>
+                </li>
+                <li>
+                    <button ng-show="saving" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Сохранение...
+                    </button>
+                </li>
+                <li>
+                    <form action="#!a_product_category_list">
+                        <button ng-hide="saved" class="btn btn-default" >
+                            Отмена
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <button ng-click="save()" class="btn btn-primary">
+                        Сохранить
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

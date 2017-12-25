@@ -1,16 +1,17 @@
 package aleksey.stepanyuk.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 @Entity @Table(name = "product_category")
-@Getter @Setter @NoArgsConstructor @ToString @EqualsAndHashCode(of = "id")
-public class ProductCategory {
+@Getter @Setter @NoArgsConstructor @ToString(exclude = "products") @EqualsAndHashCode(of = "id")
+public class ProductCategory implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +23,11 @@ public class ProductCategory {
             @JoinColumn(name = "name_id", referencedColumnName = "id")})
     private Map<Locale, String> name;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "productCategory")
-    private Set<Product> products;
+//    todo replace with DTO?
+
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "productCategory")
+    private List<Product> products;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "photo_id")
