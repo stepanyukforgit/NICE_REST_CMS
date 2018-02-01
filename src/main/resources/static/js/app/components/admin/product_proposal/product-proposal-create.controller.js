@@ -13,7 +13,8 @@ angular.module('product-proposal')
         $scope.save = function () {
             $scope.validated = true;
             if ($scope.ruProdPropNameForm.name.$valid
-                && $scope.prodPropPriceForm.price.$valid) {
+                && $scope.prodPropPriceForm.price.$valid
+                && $scope.prodPropVendorForm.vendorCode.$valid) {
 
                 $scope.saving = true;
                 $scope.saved = false;

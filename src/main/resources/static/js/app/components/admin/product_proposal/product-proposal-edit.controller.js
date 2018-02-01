@@ -22,7 +22,8 @@ angular.module('product-proposal')
         $scope.save = function () {
             $scope.validated = true;
             if ($scope.ruProdPropNameForm.name.$valid
-                && $scope.prodPropPriceForm.price.$valid) {
+                && $scope.prodPropPriceForm.price.$valid
+                && $scope.prodPropVendorForm.vendorCode.$valid) {
 
                 $scope.saving = true;
                 $scope.saved = false;
@@ -90,4 +91,3 @@ angular.module('product-proposal')
             $scope.productProposal.attributes.splice(attrIdx, 1);
         };
     });
-//todo fix. removing attribute from PP don't remove from DB!

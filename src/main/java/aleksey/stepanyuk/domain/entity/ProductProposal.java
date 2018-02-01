@@ -49,7 +49,7 @@ public class ProductProposal implements Serializable{
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(name = "product_proposal_attribute",
             joinColumns = @JoinColumn(name = "product_proposal_id"),
             inverseJoinColumns = @JoinColumn(name = "attribute_id"))

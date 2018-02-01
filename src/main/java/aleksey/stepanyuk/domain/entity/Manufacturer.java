@@ -31,8 +31,6 @@ public class Manufacturer implements Serializable {
             @JoinColumn(name = "description_id", referencedColumnName = "id")})
     private Map<Locale, String> description;
 
-//    todo replace with DTO?
-
     @OneToMany(mappedBy = "manufacturer")
     private java.util.Set<Product> products;
 
