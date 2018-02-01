@@ -21,7 +21,6 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.UUID;
 
-
 @Service
 public class FileSystemStorageService implements StorageService {
 
@@ -30,7 +29,7 @@ public class FileSystemStorageService implements StorageService {
     private final Path rootLocation = Paths.get("../upload-dir");
     private Path todaysDir;
 
-    private void init() {
+    public void init() {
         try {
             todaysDir = rootLocation.resolve(Paths.get(LocalDate.now().toString()));
             Files.createDirectories(todaysDir);

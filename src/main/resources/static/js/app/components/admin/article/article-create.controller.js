@@ -31,15 +31,3 @@ angular.module('article')
         };
 
     });
-
-
-
-
-
-
-
-
-
-
-
-

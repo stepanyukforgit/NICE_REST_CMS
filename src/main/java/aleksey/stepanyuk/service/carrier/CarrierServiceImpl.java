@@ -1,4 +1,4 @@
-package aleksey.stepanyuk.service;
+package aleksey.stepanyuk.service.carrier;
 
 import aleksey.stepanyuk.domain.entity.Carrier;
 import aleksey.stepanyuk.domain.repo.CarrierRepository;

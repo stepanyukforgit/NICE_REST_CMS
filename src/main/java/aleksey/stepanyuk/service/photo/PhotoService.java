@@ -1,4 +1,4 @@
-package aleksey.stepanyuk.service;
+package aleksey.stepanyuk.service.photo;
 
 import aleksey.stepanyuk.domain.entity.Photo;
 import org.springframework.core.io.Resource;

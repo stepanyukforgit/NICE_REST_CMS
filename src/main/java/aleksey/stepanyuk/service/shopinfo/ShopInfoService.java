@@ -1,5 +1,4 @@
-package aleksey.stepanyuk.service;
-
+package aleksey.stepanyuk.service.shopinfo;
 
 import aleksey.stepanyuk.domain.entity.ShopInfo;
 

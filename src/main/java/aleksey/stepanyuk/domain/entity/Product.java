@@ -1,39 +1,56 @@
 package aleksey.stepanyuk.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 @Entity @Table(name = "product")
-@Getter @Setter @NoArgsConstructor @ToString @EqualsAndHashCode(of = "id")
-public class Product {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Product.class)
+@Getter @Setter @NoArgsConstructor @ToString(exclude = "productProposals") @EqualsAndHashCode(of = "id")
+public class Product implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ElementCollection
+    @MapKeyColumn(name = "language", columnDefinition = "VARCHAR(2)")
     @Column(name = "name", columnDefinition = "VARCHAR(50)", nullable = false)
-    private String name;
+    @CollectionTable(name = "product_names", joinColumns = {
+            @JoinColumn(name = "name_id", referencedColumnName = "id")})
+    private Map<Locale, String> name;
 
+    @ElementCollection
+    @MapKeyColumn(name = "language", columnDefinition = "VARCHAR(2)")
+    @Column(name = "description", columnDefinition = "TEXT")
+    @CollectionTable(name = "product_descriptions", joinColumns = {
+            @JoinColumn(name = "description_id", referencedColumnName = "id")})
+    private Map<Locale, String> description;
+
+    //    todo add Lazy!!!
     @ManyToOne
-    @JoinColumn(name = "product_category")
+    @JoinColumn(name = "product_category", nullable = false)
     private ProductCategory productCategory;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //    todo add Lazy!!!
+    @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinTable(name = "product_photos",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "photo_id"))
-    private Set<Photo> photos;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "photo_id")
+    private Photo photo;
 
     @ElementCollection
     @CollectionTable(name = "comment", joinColumns = @JoinColumn(name = "product_id"))
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "product")
-    private Set<ProductProposal> proposals;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductProposal> productProposals;
 }

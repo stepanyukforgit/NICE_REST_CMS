@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ManufacturerController {
 
     @GetMapping("/a_manufacturer_create")
-    public String manufacturerCreate(){
+    public String manufacturerCreate() {
         return "admin/components/manufacturer/a_manufacturer_create";
     }
 
     @GetMapping("/a_manufacturer_edit")
-    public String manufacturerEdit(){
+    public String manufacturerEdit() {
         return "admin/components/manufacturer/a_manufacturer_edit";
     }
 
     @GetMapping("/a_manufacturer_list")
-    public String manufacturerList(){
+    public String manufacturerList() {
         return "admin/components/manufacturer/a_manufacturer_list";
     }
 }

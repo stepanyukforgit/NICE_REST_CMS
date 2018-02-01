@@ -67,15 +67,3 @@ angular.module('manufacturer')
             filesUploaderService.resetFiles($scope.filesToUpload, 0);
         };
     });
-
-
-
-
-
-
-
-
-
-
-
-

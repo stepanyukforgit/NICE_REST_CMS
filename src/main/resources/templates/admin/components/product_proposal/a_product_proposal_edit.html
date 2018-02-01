@@ -1,0 +1,329 @@
+<div class="container" ng-controller="ProductProposalEditCtrl" ng-init="init()">
+    <div class="row">
+        <h1>Редактирование товарного предложения</h1>
+        <h4>({{productProposal.product.name.ru}})</h4>
+        <p>Введите данные для редактирования товарного предложения:</p>
+    </div>
+
+    <div class="form-group">
+        <div class="panel panel-default" style="padding: 5px; margin-bottom: 70px">
+            <div class="row">
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#prodPropNameRu" target="_self">RU</a></li>
+                            <li><a data-toggle="tab" href="#prodPropNameUa" target="_self">UA</a></li>
+                        </ul>
+                        <label>
+                            Название товарного предложения:
+                        </label>
+                        <div class="tab-content">
+                            <div id="prodPropNameRu" class="tab-pane fade in active">
+                                <form name="ruProdPropNameForm">
+                                    <div class="form-group"
+                                         ng-class="{ 'has-error' : ruProdPropNameForm.name.$invalid &amp;&amp; validated }">
+                                        <input name="name" type="text" class="form-control" maxlength="50" required=""
+                                               ng-model="productProposal.name.ru"/>
+                                        <p class="help-block"
+                                           ng-show="ruProdPropNameForm.name.$invalid &amp;&amp; validated" >
+                                            Введите название товарного предложения.
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="prodPropNameUa" class="tab-pane fade">
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="50"
+                                           ng-model="productProposal.name.ua"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+                    <div class="row" style="margin: 60px 20px;">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <label>
+                                Наличие:
+                            </label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="material-switch">
+                                <input id="someSwitchOptionPrimary" type="checkbox"
+                                       ng-model="productProposal.availability"/>
+                                <label for="someSwitchOptionPrimary" class="label-primary"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" style="padding: 10px">
+                <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-inline">
+                            <form name="prodPropPriceForm">
+                                <div class="form-group"
+                                     ng-class="{ 'has-error' : prodPropPriceForm.price.$invalid &amp;&amp; validated }">
+                                    <label>
+                                        Цена:
+                                    </label>
+                                    <input name="price" type="number" min="0" class="form-control" required=""
+                                           ng-model="productProposal.price"/>
+                                    <p class="help-block"
+                                       ng-show="prodPropPriceForm.price.$invalid &amp;&amp; validated" >Введите цену.</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Скидка:
+                                </label>
+                                <input type="number" min="0" class="form-control"
+                                       ng-model="productProposal.sale"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-inline">
+                            <form name="prodPropVendorForm">
+                                <div class="form-group"
+                                     ng-class="{ 'has-error' : prodPropVendorForm.vendorCode.$invalid &amp;&amp; validated }">
+                                    <label>
+                                        Артикул:
+                                    </label>
+                                    <input name="vendorCode" class="form-control" required=""
+                                           ng-model="productProposal.vendorCode"/>
+                                    <p class="help-block"
+                                       ng-show="prodPropVendorForm.vendorCode.$invalid &amp;&amp; validated" >Введите артикул.</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" style="padding: 10px">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <label>
+                            Фотографии товарного предложения:
+                        </label>
+                    </div>
+                </div>
+                <div class="row" style="height: 135px;">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <p style="font-size: 20px">
+                            <span class="label label-default">
+                                Текущие фото:
+                            </span>
+                        </p>
+                    </div>
+                    <div ng-hide="productProposal.photos.length > 0" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <div class="thumbnail" style="background-image: url(img/noimagefound.jpeg);"></div>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <div class="row scrollmenu" style="margin-right: 0px">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 scrollitem"
+                                 ng-repeat="photo in productProposal.photos">
+                                <div class="thumbnail"
+                                     ng-style="{'background-image': 'url(/get_prev_photo/' + photo.id+')'};">
+                                    <button type="button" class="btn btn-danger pull-right"
+                                            ng-click="remove($index)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="height: 135px;">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <label class="btn btn-primary btn-file">
+                            Добавить фото...
+                            <input type="file" accept="image/*" multiple="multiple" style="display: none;"
+                                   nice-files="filesToUpload"/>
+                        </label>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <div class="row scrollmenu" style="margin-right: 0px">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 scrollitem"
+                                 ng-repeat="photo in filesToUpload">
+                                <div class="thumbnail"
+                                     ng-show="filesToUpload[0]"
+                                     ng-style="{'background-image' : 'url('+photo.url+')'}">
+                                    <button type="button" class="btn btn-danger pull-right"
+                                            ng-click="reset(filesToUpload, $index)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <label>
+                            Атрибуты в товарном предложении:
+                        </label>
+                        <button class="btn btn-primary btn-sm pull-right"
+                                ng-click="newAttribute()">
+                            Новый атрибут &nbsp;<span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#ruProdPropAttr" target="_self">RU</a></li>
+                            <li><a data-toggle="tab" href="#uaProdPropAttr" target="_self">UA</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                    <p class="text-center">Названия:</p>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p class="text-center">Значения:</p>
+                                </div>
+                            </div>
+                            <div id="ruProdPropAttr" class="tab-pane fade in active">
+                                <div class="row"
+                                     ng-repeat="attribute in productProposal.attributes">
+                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                        <form>
+                                            <div class="form-group">
+                                                <input class="form-control input-sm" maxlength="50"
+                                                       ng-model="attribute.name.ru"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px">
+                                        <form>
+                                            <div class="form-group">
+                                                <input class="form-control input-sm" maxlength="50"
+                                                       ng-model="attribute.value.ru"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-left: 0px">
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                ng-click="removeAttr($index)">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="uaProdPropAttr" class="tab-pane fade">
+                                <div class="row"
+                                     ng-repeat="attribute in productProposal.attributes">
+                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                        <form>
+                                            <div class="form-group">
+                                                <input class="form-control input-sm"
+                                                       ng-model="attribute.name.ua"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px">
+                                        <form>
+                                            <div class="form-group">
+                                                <input class="form-control input-sm"
+                                                       ng-model="attribute.value.ua"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-left: 0px">
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                ng-click="removeAttr($index)">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#ruProdPropDescr" target="_self">RU</a></li>
+                            <li><a data-toggle="tab" href="#uaProdPropDescr" target="_self">UA</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <label>
+                                Дополнительные сведения:
+                            </label>
+                            <div id="ruProdPropDescr" class="tab-pane fade in active">
+                                <form>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="5" style="resize: vertical;"
+                                                  ng-model="productProposal.description.ru"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="uaProdPropDescr" class="tab-pane fade">
+                                <form>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="5" style="resize: vertical;"
+                                                  ng-model="productProposal.description.ua"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" role="button">
+                    Редактирование товарного предложения
+                </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="saved">
+                    <a ng-href="#!a_product_edit/{{productProposal.product.id}}" style="padding: 0px">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Сохранено, вернуться к редактированию продукта.
+                        </button>
+                    </a>
+                </li>
+                <li ng-show="notSaved">
+                    <button class="btn btn-danger"
+                            ng-click="notSaved=false;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        При сохранении произошла ошибка.
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-warning"
+                            ng-show="saving">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Сохранение...
+                    </button>
+                </li>
+                <li>
+                    <!--todo replace cancel with "a" tag in other places -->
+                    <a ng-href="#!a_product_edit/{{productProposal.product.id}}" style="padding: 0px">
+                        <button class="btn btn-default"
+                                ng-hide="saved">
+                            Отмена
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <button class="btn btn-primary"
+                            ng-click="save()">
+                        Сохранить
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

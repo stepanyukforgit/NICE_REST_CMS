@@ -11,8 +11,7 @@ import java.util.Map;
 @Getter @Setter @NoArgsConstructor @ToString @EqualsAndHashCode(of = "name")
 public class Attribute implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ElementCollection

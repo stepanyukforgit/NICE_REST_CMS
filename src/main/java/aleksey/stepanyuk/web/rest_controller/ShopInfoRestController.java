@@ -1,7 +1,7 @@
 package aleksey.stepanyuk.web.rest_controller;
 
 import aleksey.stepanyuk.domain.entity.ShopInfo;
-import aleksey.stepanyuk.service.ShopInfoService;
+import aleksey.stepanyuk.service.shopinfo.ShopInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class ShopInfoRestController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<ShopInfo> readShopInfo(){
+    public ResponseEntity<ShopInfo> readShopInfo() {
         ShopInfo shopInfo = shopInfoService.read();
         return ResponseEntity.ok(shopInfo);
     }

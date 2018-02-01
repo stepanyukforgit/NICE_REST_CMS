@@ -1,0 +1,237 @@
+<div class="container" ng-controller="ProductEditCtrl" ng-init="init()">
+    <div class="row">
+        <h1>Редактирование продукта</h1>
+        <p>Введите данные для редактирования продукта:</p>
+    </div>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#ru" target="_self">RU</a></li>
+        <li><a data-toggle="tab" href="#ua" target="_self">UA</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="ru" class="tab-pane fade in active">
+            <form name="ruProdNameForm">
+                <div class="form-group" ng-class="{ 'has-error' : ruProdNameForm.name.$invalid &amp;&amp; validated }">
+                    <label>Название:</label>
+                    <input name="name" type="text" class="form-control" maxlength="50" required=""
+                           ng-model="product.name.ru"/>
+                    <p class="help-block"
+                       ng-show="ruProdNameForm.name.$invalid &amp;&amp; validated" >Введите название продукта.</p>
+                </div>
+                <div class="form-group">
+                    <label>Описание:</label>
+                    <summernote height="200"
+                                ng-model="product.description.ru"></summernote>
+                </div>
+            </form>
+        </div>
+        <div id="ua" class="tab-pane fade">
+            <div class="form-group">
+                <label>Название:</label>
+                <input type="text" class="form-control" maxlength="50"
+                       ng-model="product.name.ua"/>
+            </div>
+            <div class="form-group">
+                <label>Описание:</label>
+                <summernote height="200"
+                            ng-model="product.description.ua"></summernote>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="panel panel-default" style="padding: 10px">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <label>Фото:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <div class="thumbnail" style="background-image: url(img/noimagefound.jpeg);"
+                                 ng-hide="product.photo.id">
+                            </div>
+
+                            <div class="thumbnail"
+                                 ng-show="product.photo.id"
+                                 ng-style="photoPrevLinkStyle">
+
+                                <button type="button" class="btn btn-danger pull-right"
+                                        ng-click="remove()">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <label class="btn btn-primary btn-file">
+                                Новое фото...
+                                <input type="file" accept="image/*" style="display: none;"
+                                       nice-files="fileToUpload"/>
+                            </label>
+                            <p ng-show="fileToUpload[0]">Size: {{fileToUpload[0].size}} bytes</p>
+                            <p ng-show="fileToUpload[0]">Name: {{fileToUpload[0].name}}</p>
+                        </div>
+
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="thumbnail" style="background-image: url(img/noimagefound.jpeg);"
+                                 ng-hide="fileToUpload[0]">
+                            </div>
+
+                            <div class="thumbnail"
+                                 ng-show="fileToUpload[0]"
+                                 ng-style="{'background-image' : 'url('+fileToUpload[0].url+')'}">
+
+                                <button type="button" class="btn btn-danger pull-right"
+                                        ng-click="reset(fileToUpload, 0)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <div class="row">
+                        <label>
+                            Категория продуктов:
+                        </label>
+                        <select class="form-control has-error" name="select" required="required"
+                                ng-model="product.productCategory"
+                                ng-options="pc.name.ru for pc in productCategoryList track by pc.id">
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label>
+                            Производитель:
+                        </label>
+                        <select class="form-control"
+                                ng-model="product.manufacturer"
+                                ng-options="m.name.ru for m in manufacturerList track by m.id">
+                            <option value="">- не указывать производителя -</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <h3>
+                <span class="label label-default">
+                    Товарные предложения:
+                </span>
+            </h3>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">#</th>
+                <th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">Название</th>
+                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Артикул</th>
+                <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Наличие</th>
+                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Ред.</th>
+                <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Удал.</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="productProposal in product.productProposals">
+                <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{$index+1}}</td>
+                <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5">{{productProposal.name.ru}}</td>
+                <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">{{productProposal.vendorCode}}</td>
+                <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <p ng-show="productProposal.availability">Есть</p>
+                    <p ng-hide="productProposal.availability">Нет</p>
+                </td>
+                <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <a ng-href="#!a_product_proposal_edit/{{productProposal.id}}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+                <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm"
+                                ng-click="selectToRemove(productProposal.id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a ng-href="#!a_product_proposal_create/{{product.id}}">
+            <button class="btn btn-primary btn-block" style="margin-bottom: 70px">
+                Новое товарное предложение &nbsp;<span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </a>
+    </div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" role="button">Редактирование продукта</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="saved">
+                    <form action="#!a_product_list">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Сохранено, вернуться к списку продуктов.
+                        </button>
+                    </form>
+                </li>
+                <li ng-show="notSaved">
+                    <button class="btn btn-danger"
+                            ng-click="notSaved=false;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        При сохранении произошла ошибка.
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-warning"
+                            ng-show="saving">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Сохранение...
+                    </button>
+                </li>
+                <li>
+                    <form action="#!a_product_list">
+                        <button class="btn btn-default"
+                                ng-hide="saved">
+                            Отмена
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <button class="btn btn-primary"
+                            ng-click="save()">
+                        Сохранить
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Modal -->
+    <div id="confirm" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Вы уверены?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Выбранное товарное предложение будет удалено.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"
+                            ng-click="removeProductProposal()">
+                        Удалить
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Отменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

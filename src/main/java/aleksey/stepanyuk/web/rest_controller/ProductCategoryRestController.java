@@ -1,8 +1,8 @@
 package aleksey.stepanyuk.web.rest_controller;
 
 import aleksey.stepanyuk.domain.entity.ProductCategory;
-import aleksey.stepanyuk.service.ProductCategoryService;
-import aleksey.stepanyuk.service.dto.ProdCatForListDto;
+import aleksey.stepanyuk.service.product_category.ProductCategoryService;
+import aleksey.stepanyuk.service.product_category.dto.ProdCatForListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

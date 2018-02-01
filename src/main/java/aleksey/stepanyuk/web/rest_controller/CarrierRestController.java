@@ -1,7 +1,7 @@
 package aleksey.stepanyuk.web.rest_controller;
 
 import aleksey.stepanyuk.domain.entity.Carrier;
-import aleksey.stepanyuk.service.CarrierService;
+import aleksey.stepanyuk.service.carrier.CarrierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class CarrierRestController {
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<Carrier> readCarrier(@PathVariable Long id){
+    public ResponseEntity<Carrier> readCarrier(@PathVariable Long id) {
         return ResponseEntity.ok(carrierService.read(id));
     }
 

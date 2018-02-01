@@ -42,6 +42,15 @@
     <script type="text/javascript" th:src="@{js/app/components/admin/product_category/product-category-create.controller.js}"></script>
     <script type="text/javascript" th:src="@{js/app/components/admin/product_category/product-category-edit.controller.js}"></script>
 
+    <script type="text/javascript" th:src="@{js/app/components/admin/product/product.module.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/product/product-list.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/product/product-create.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/product/product-edit.controller.js}"></script>
+
+    <script type="text/javascript" th:src="@{js/app/components/admin/product_proposal/product-proposal.module.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/product_proposal/product-proposal-create.controller.js}"></script>
+    <script type="text/javascript" th:src="@{js/app/components/admin/product_proposal/product-proposal-edit.controller.js}"></script>
+
 </head>
 <body ng-app="niceApp">
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -61,6 +70,7 @@
             <li class="dropdown"><a role="button" class="dropdown-toggle" data-toggle="dropdown">Каталог<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="#!a_product_category_list">Категории продуктов</a></li>
+                    <li><a href="#!a_product_list">Продукты</a></li>
                     <li><a href="#!a_manufacturer_list">Производители</a></li>
                 </ul>
             </li>

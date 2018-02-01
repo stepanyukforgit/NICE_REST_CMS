@@ -103,3 +103,14 @@ ul.nav.navbar-nav.navbar-right button{
     left: 20px;
 }
 /*switch button*/
+
+/*horizontal scroll*/
+.scrollmenu{
+    overflow: auto;
+    white-space: nowrap;
+}
+.scrollmenu .scrollitem{
+    display: inline-block;
+    float: none;
+}
+/*horizontal scroll*/

@@ -1,4 +1,4 @@
-package aleksey.stepanyuk.service.dto;
+package aleksey.stepanyuk.service.product.dto;
 
 import aleksey.stepanyuk.domain.entity.Photo;
 import lombok.*;
@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter @ToString
-public class ProdCatForListDto {
+public class ProdForListDto {
 
     private Long id;
 

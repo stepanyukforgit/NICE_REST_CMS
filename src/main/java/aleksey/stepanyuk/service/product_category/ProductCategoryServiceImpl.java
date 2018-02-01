@@ -1,8 +1,8 @@
-package aleksey.stepanyuk.service;
+package aleksey.stepanyuk.service.product_category;
 
 import aleksey.stepanyuk.domain.entity.ProductCategory;
 import aleksey.stepanyuk.domain.repo.ProductCategoryRepository;
-import aleksey.stepanyuk.service.dto.ProdCatForListDto;
+import aleksey.stepanyuk.service.product_category.dto.ProdCatForListDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

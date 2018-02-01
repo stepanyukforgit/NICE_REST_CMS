@@ -1,14 +1,18 @@
 package aleksey.stepanyuk.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.Map;
 
 @Entity @Table(name = "manufacturer")
-@Getter @Setter @NoArgsConstructor @ToString @EqualsAndHashCode(of = "id")
-public class Manufacturer {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Getter @Setter @NoArgsConstructor @ToString(exclude = "products") @EqualsAndHashCode(of = "id")
+public class Manufacturer implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +30,8 @@ public class Manufacturer {
     @CollectionTable(name = "manufacturer_descriptions", joinColumns = {
             @JoinColumn(name = "description_id", referencedColumnName = "id")})
     private Map<Locale, String> description;
+
+//    todo replace with DTO?
 
     @OneToMany(mappedBy = "manufacturer")
     private java.util.Set<Product> products;

@@ -1,8 +1,8 @@
 package aleksey.stepanyuk.web.rest_controller;
 
 import aleksey.stepanyuk.domain.entity.Manufacturer;
-import aleksey.stepanyuk.service.ManufacturerService;
-import aleksey.stepanyuk.service.dto.ManufForListDto;
+import aleksey.stepanyuk.service.manufacturer.ManufacturerService;
+import aleksey.stepanyuk.service.manufacturer.dto.ManufForListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

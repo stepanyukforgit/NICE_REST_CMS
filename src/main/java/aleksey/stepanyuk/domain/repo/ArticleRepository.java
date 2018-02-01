@@ -1,6 +1,5 @@
 package aleksey.stepanyuk.domain.repo;
 
-
 import aleksey.stepanyuk.domain.entity.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 

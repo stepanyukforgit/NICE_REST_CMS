@@ -1,7 +1,8 @@
-package aleksey.stepanyuk.service;
+package aleksey.stepanyuk.service.photo;
 
 import aleksey.stepanyuk.domain.entity.Photo;
 import aleksey.stepanyuk.domain.repo.PhotoRepository;
+import aleksey.stepanyuk.service.StorageService;
 import aleksey.stepanyuk.util.NiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,7 +1,7 @@
 package aleksey.stepanyuk.web.rest_controller;
 
 import aleksey.stepanyuk.domain.entity.Article;
-import aleksey.stepanyuk.service.ArticleService;
+import aleksey.stepanyuk.service.article.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

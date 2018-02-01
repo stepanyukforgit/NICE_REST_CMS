@@ -67,15 +67,3 @@ angular.module('carrier')
             filesUploaderService.resetFiles($scope.filesToUpload, 0);
         };
     });
-
-
-
-
-
-
-
-
-
-
-
-

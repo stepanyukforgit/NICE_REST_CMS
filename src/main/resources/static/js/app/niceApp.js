@@ -4,5 +4,7 @@ angular.module('niceApp', [
     'article',
     'manufacturer',
     'carrier',
-    'product-category'
+    'product-category',
+    'product-proposal',
+    'product'
 ]);

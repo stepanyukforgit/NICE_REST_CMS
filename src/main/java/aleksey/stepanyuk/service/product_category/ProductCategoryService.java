@@ -1,8 +1,7 @@
-package aleksey.stepanyuk.service;
-
+package aleksey.stepanyuk.service.product_category;
 
 import aleksey.stepanyuk.domain.entity.ProductCategory;
-import aleksey.stepanyuk.service.dto.ProdCatForListDto;
+import aleksey.stepanyuk.service.product_category.dto.ProdCatForListDto;
 
 import java.util.List;
 

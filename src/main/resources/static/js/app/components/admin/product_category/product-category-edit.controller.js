@@ -10,16 +10,18 @@ angular.module('product-category')
         $scope.saved = false;
         $scope.notSaved = false;
 
-        $http.get('/admin/product_category/read/' + $routeParams.productCategoryId)
-            .then(function (response) {
-                $scope.productCategory = response.data;
-                if (response.data.photo) {
-                    $scope.photoPrevLinkStyle = {
-                        'background-image': 'url(/get_prev_photo/' + response.data.photo.id+')'
-                    };
-                }
-                angular.element('#loadingPage').modal('hide');
-            });
+        $scope.init = function () {
+            $http.get('/admin/product_category/read/' + $routeParams.productCategoryId)
+                .then(function (response) {
+                    $scope.productCategory = response.data;
+                    if (response.data.photo) {
+                        $scope.photoPrevLinkStyle = {
+                            'background-image': 'url(/get_prev_photo/' + response.data.photo.id + ')'
+                        };
+                    }
+                    angular.element('#loadingPage').modal('hide');
+                });
+        };
 
         $scope.save = function () {
             $scope.validated = true;
@@ -30,54 +32,50 @@ angular.module('product-category')
                 $scope.notSaved = false;
 
                 uploadImage();
-                uploadImageList();
             }
         };
 
-
         var uploadImage = function () {
-            var file = $scope.filesToUpload;
-            var uploadUrl = "/upload_photo";
+            var file = $scope.fileToUpload;
 
             if (file && file.length !== 0) {
-
+                var uploadUrl = "/upload_photo";
                 var fileUploadedPromise = filesUploaderService.uploadFileToUrl(file, uploadUrl);
 
-                fileUploadedPromise
-                    .then(
-                        function success(result) {
-                            $scope.productCategory.photo = result.data;
-                        },
-                        function error() {
-                            $scope.saving = false;
-                            $scope.saved = false;
-                            $scope.notSaved = true;
-                            reset();
-                        });
+                fileUploadedPromise.then(
+                    function success(result) {
+                        $scope.productCategory.photo = result.data;
+                        uploadImageList();
+                    },
+                    function error() {
+                        $scope.saving = false;
+                        $scope.saved = false;
+                        $scope.notSaved = true;
+                        reset();
+                    });
+            } else {
+                uploadImageList();
             }
         };
 
         var uploadImageList = function () {
             var file = $scope.filesToUpload;
-            var uploadUrl = "/upload_photo_list";
 
             if (file && file.length !== 0) {
-
+                var uploadUrl = "/upload_photo_list";
                 var fileUploadedPromise = filesUploaderService.uploadFileToUrl(file, uploadUrl);
 
-                fileUploadedPromise
-                    .then(
-                        function success(result) {
-                            $scope.productCategory.bannerPhotos = result.data;
-                            saveProductCategory();
-                        },
-                        function error() {
-                            $scope.saving = false;
-                            $scope.saved = false;
-                            $scope.notSaved = true;
-                        });
-            }
-            else {
+                fileUploadedPromise.then(
+                    function success(result) {
+                        $scope.productCategory.bannerPhotos = result.data;
+                        saveProductCategory();
+                    },
+                    function error() {
+                        $scope.saving = false;
+                        $scope.saved = false;
+                        $scope.notSaved = true;
+                    });
+            } else {
                 saveProductCategory();
             }
         };
@@ -89,6 +87,8 @@ angular.module('product-category')
                         $scope.saving = false;
                         $scope.notSaved = false;
                         $scope.saved = true;
+
+                        $scope.init();
                     },
                     function error() {
                         $scope.saving = false;
@@ -102,9 +102,12 @@ angular.module('product-category')
             filesUploaderService.resetFiles(files, idx);
         };
 
-        $scope.remove = function () {
+        $scope.removePhoto = function () {
             $scope.productCategory.photo = null;
             $scope.photoPrevLink = 'img/noimagefound.jpeg';
         };
 
+        $scope.removeBannerPhotos = function (idx) {
+            $scope.productCategory.bannerPhotos.splice(idx, 1);
+        };
     });

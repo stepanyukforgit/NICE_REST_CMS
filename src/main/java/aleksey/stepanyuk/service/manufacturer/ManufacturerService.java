@@ -1,8 +1,7 @@
-package aleksey.stepanyuk.service;
-
+package aleksey.stepanyuk.service.manufacturer;
 
 import aleksey.stepanyuk.domain.entity.Manufacturer;
-import aleksey.stepanyuk.service.dto.ManufForListDto;
+import aleksey.stepanyuk.service.manufacturer.dto.ManufForListDto;
 
 import java.util.List;
 

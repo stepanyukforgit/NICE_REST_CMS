@@ -1,5 +1,4 @@
-package aleksey.stepanyuk.service;
-
+package aleksey.stepanyuk.service.article;
 
 import aleksey.stepanyuk.domain.entity.Article;
 

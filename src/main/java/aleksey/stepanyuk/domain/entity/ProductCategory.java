@@ -1,6 +1,7 @@
 package aleksey.stepanyuk.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Locale;
 import java.util.Map;
 
 @Entity @Table(name = "product_category")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = ProductCategory.class)
 @Getter @Setter @NoArgsConstructor @ToString(exclude = "products") @EqualsAndHashCode(of = "id")
 public class ProductCategory implements Serializable {
 
@@ -25,7 +27,6 @@ public class ProductCategory implements Serializable {
 
 //    todo replace with DTO?
 
-    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "productCategory")
     private List<Product> products;
 

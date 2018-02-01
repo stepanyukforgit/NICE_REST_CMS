@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ShopInfoController {
 
     @GetMapping("/a_shopinfo")
-    public String article(){
+    public String article() {
         return "admin/components/shopinfo/a_shopinfo";
     }
 }

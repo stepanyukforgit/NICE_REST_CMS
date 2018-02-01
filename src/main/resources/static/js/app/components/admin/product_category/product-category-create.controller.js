@@ -90,14 +90,4 @@ angular.module('product-category')
         };
     });
 
-
-
-
-
-
-
-
-
-
-
-
+//todo fix saving photo and banner photos simultaneously(some times it works)
