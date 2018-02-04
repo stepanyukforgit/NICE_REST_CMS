@@ -4,6 +4,7 @@ angular.module('product-proposal')
         $scope.productProposal = {};
         $scope.productProposal.attributes = [];
         $scope.productId = $routeParams.productId;
+        $scope.productName = $routeParams.productName;
 
         $scope.validated = false;
         $scope.saving = false;

@@ -1,6 +1,7 @@
 <div class="container" ng-controller="ProductProposalCtrl">
     <div class="row">
         <h1>Новое товарное предложение</h1>
+        <h4>({{productName}})</h4>
         <p>Введите данные для добавления нового товарного предложения:</p>
     </div>
 
@@ -88,7 +89,7 @@
                                     <label>
                                         Артикул:
                                     </label>
-                                    <input name="vendorCode" class="form-control" required=""
+                                    <input name="vendorCode" class="form-control" required="" maxlength="8"
                                            ng-model="productProposal.vendorCode"/>
                                     <p class="help-block"
                                        ng-show="prodPropVendorForm.vendorCode.$invalid &amp;&amp; validated" >Введите артикул.</p>
