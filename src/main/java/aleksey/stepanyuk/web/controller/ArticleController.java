@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ArticleController {
 
     @GetMapping("/a_article_create")
-    public String article() {
+    public String articleCreate() {
         return "admin/components/article/a_article_create";
     }
 
