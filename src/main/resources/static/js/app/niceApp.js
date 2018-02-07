@@ -6,5 +6,6 @@ angular.module('niceApp', [
     'carrier',
     'product-category',
     'product-proposal',
-    'product'
+    'product',
+    'order'
 ]);
