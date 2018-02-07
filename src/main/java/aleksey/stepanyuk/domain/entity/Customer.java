@@ -10,14 +10,14 @@ import javax.persistence.Embeddable;
 public class Customer {
 
     @Column(name = "cust_name", columnDefinition = "VARCHAR(50)", nullable = false)
-    private String customerName;
+    private String custName;
 
     @Column(name = "cust_address", columnDefinition = "VARCHAR(200)", nullable = false)
-    private String customerAddress;
+    private String custAddress;
 
     @Column(name = "cust_phone", columnDefinition = "CHAR(15)", nullable = false)
-    private String customerPhone;
+    private String custPhone;
 
     @Column(name = "cust_email", columnDefinition = "VARCHAR(30)")
-    private String customerEmail;
+    private String custEmail;
 }

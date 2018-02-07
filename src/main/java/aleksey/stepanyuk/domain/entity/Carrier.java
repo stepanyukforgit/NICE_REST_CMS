@@ -1,5 +1,7 @@
 package aleksey.stepanyuk.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Entity @Table(name = "carrier")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Carrier.class)
 @Getter @Setter @NoArgsConstructor @ToString @EqualsAndHashCode(of = "id")
 public class Carrier implements Serializable{
 
@@ -22,6 +25,7 @@ public class Carrier implements Serializable{
             @JoinColumn(name = "name_id", referencedColumnName = "id")})
     private Map<Locale, String> name;
 
+    //todo find out advisability of using this kind of relationship
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "carrier")
     private Set<Order> orders;
 
