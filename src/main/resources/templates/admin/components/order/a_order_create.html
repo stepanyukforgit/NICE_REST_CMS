@@ -1,0 +1,277 @@
+<div class="container" ng-controller="OrderCreateCtrl">
+
+    <div class="row">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <h1>Новый заказ</h1>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <select class="form-control" style="margin-top: 10%; font-size: 20px" required="required"
+                    ng-init="status = 'НЕ ОБРАБОТАН'"
+                    ng-model="status"
+                    ng-options="v for (k,v) in statList"
+                    ng-change="setStatus(status)">
+            </select>
+        </div>
+    </div>
+    <p>Введите данные для добавления нового заказа:</p>
+
+    <div class="form-group">
+        <div class="panel panel-default" style="padding: 5px; margin-bottom: 70px">
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <form name="custIdentForm">
+                            <label>
+                                Имя заказчика:
+                            </label>
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : custIdentForm.name.$invalid &amp;&amp; validated }">
+                                <input name="name" type="text" class="form-control" maxlength="255" required=""
+                                       ng-model="order.customer.custName"/>
+                                <p class="help-block"
+                                   ng-show="custIdentForm.name.$invalid &amp;&amp; validated" >Введите имя заказчика.</p>
+                            </div>
+                            <label>
+                                Адрес:
+                            </label>
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : custIdentForm.address.$invalid &amp;&amp; validated }">
+                                <input name="address" type="text" class="form-control" maxlength="255" required=""
+                                       ng-model="order.customer.custAddress"/>
+                                <p class="help-block"
+                                   ng-show="custIdentForm.address.$invalid &amp;&amp; validated" >Введите адрес заказчика.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <form name="custContForm">
+                            <label>
+                                Телефон:
+                            </label>
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : custContForm.phone.$invalid &amp;&amp; validated }">
+                                <input name="phone" type="number" class="form-control" maxlength="10" required=""
+                                       ng-model="order.customer.custPhone"/>
+                                <p class="help-block"
+                                   ng-show="custContForm.phone.$invalid &amp;&amp; validated" >Введите номер телефона заказчика.</p>
+                            </div>
+                            <label>
+                                Почта:
+                            </label>
+                            <div class="form-group"
+                                 ng-class="{ 'has-error' : custContForm.email.$invalid &amp;&amp; validated }">
+                                <input name="email" type="email" class="form-control" maxlength="50"
+                                       ng-model="order.customer.custEmail"/>
+                                <p class="help-block"
+                                   ng-show="custContForm.email.$invalid &amp;&amp; validated" >Неверный формат Email.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <label>
+                                    Продукт:
+                                </label>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <label>
+                                    Товарное предложение:
+                                </label>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                <label>
+                                    Цена(%):
+                                </label>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                <label>
+                                    Артикул:
+                                </label>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <label>
+                                    Кол-во:
+                                </label>
+                            </div>
+                        </div>
+                        <form name="prodForm">
+                            <div class="row" ng-repeat="ordered in order.orderedProducts track by $index">
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group"
+                                         ng-value="selPName = 'select'+$index"
+                                         ng-class="{ 'has-error' : prodForm[selPName].$invalid &amp;&amp; validated }">
+                                        <select class="form-control has-error" name="{{selPName}}" required="required"
+                                                ng-options="p.name.ru for p in prodList"
+                                                ng-model="orderedProduct"
+                                                ng-change="getProductProposals(orderedProduct, $index)">
+                                            <option value="">- продукт -</option>
+                                        </select>
+                                        <p class="help-block"
+                                           ng-show="prodForm[selPName].$invalid &amp;&amp; validated">Выберите продукт.</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group"
+                                         ng-value="selPPName = 'select'+$index+$index"
+                                         ng-class="{ 'has-error' : prodForm[selPPName].$invalid &amp;&amp; validated }">
+                                        <select class="form-control" name="{{selPPName}}" required="required"
+                                                ng-options="pp.name.ru for pp in propList[$index]"
+                                                ng-model="order.orderedProducts[$index].proposal"
+                                                ng-change="setTotalPrice()">
+                                            <option value="" selected="" hidden="" />
+                                        </select>
+                                        <p class="help-block"
+                                           ng-show="prodForm[selPPName].$invalid &amp;&amp; validated">Нет товарных предложений.</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <label>
+                                        {{order.orderedProducts[$index].proposal.price}}
+                                    </label>
+                                    <label ng-show="order.orderedProducts[$index].proposal.sale">
+                                        ({{order.orderedProducts[$index].proposal.sale}})
+                                    </label>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <label>{{order.orderedProducts[$index].proposal.vendorCode}}</label>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <input type="number" class="form-control" min="1" max="100" required=""
+                                           ng-model="order.orderedProducts[$index].quantity"
+                                           ng-change="setTotalPrice()"/>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <button type="button" class="btn btn-danger pull-right"
+                                            ng-click="removeOrderedProduct($index)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <button class="btn btn-primary btn-block"
+                                ng-click="addOrderedProduct()">
+                            Добавить продукт &nbsp;<span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <form name="carrierForm">
+                            <div class="form-group">
+                                <label>
+                                    Доставка:
+                                </label>
+                                <select class="form-control" name="select"
+                                        ng-model="order.carrier"
+                                        ng-options="c.name.ru for c in carrList">
+                                    <option value="">- доставка -</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <label>
+                                                Статус оплаты:
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="material-switch">
+                                                <input id="someSwitchOptionPrimary" type="checkbox"
+                                                       ng-model="order.isPayed"/>
+                                                <label for="someSwitchOptionPrimary" class="label-primary"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <label>
+                                                К оплате:
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <label>
+                                                {{totalPrice}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="panel panel-default" style="padding: 10px">
+                        <label>
+                            Дополнительные сведения:
+                        </label>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="2" style="resize: vertical;"
+                                      ng-model="order.details"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" role="button">Новый заказ</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="saved">
+                    <a ng-href="#!a_order_list" style="padding: 0px">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            Сохранено, вернуться к списку заказов.
+                        </button>
+                    </a>
+                </li>
+                <li ng-show="notSaved">
+                    <button class="btn btn-danger"
+                            ng-click="notSaved=false;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        При сохранении произошла ошибка.
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-warning"
+                            ng-show="saving">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Сохранение...
+                    </button>
+                </li>
+                <li>
+                    <a ng-href="#!a_order_list" style="padding: 0px">
+                        <button class="btn btn-default"
+                                ng-hide="saved">
+                            Отмена
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <button class="btn btn-primary"
+                            ng-click="save()">
+                        Сохранить
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
