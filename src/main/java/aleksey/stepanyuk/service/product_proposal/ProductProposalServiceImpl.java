@@ -5,10 +5,14 @@ import aleksey.stepanyuk.domain.entity.ProductProposal;
 import aleksey.stepanyuk.domain.repo.ProductProposalRepository;
 import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForEditDto;
 import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForListDto;
+import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForOrderDto;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +45,13 @@ public class ProductProposalServiceImpl implements ProductProposalService {
     @Override
     public ProdPropForEditDto read(Long id) {
         return modelMapper.map(productProposalRepository.findOne(id), ProdPropForEditDto.class);
+    }
+
+    @Override
+    public List<ProdPropForOrderDto> readByProdId(Long id) {
+        List<ProductProposal> source = productProposalRepository.findByProductId(id);
+        Type listType = new TypeToken<List<ProdPropForOrderDto>>() {}.getType();
+        return modelMapper.map(source, listType);
     }
 
     @Override

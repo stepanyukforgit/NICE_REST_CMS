@@ -13,5 +13,7 @@ public class ProdForListDto {
 
     private Map<Locale, String> name;
 
+    private Map<Locale, String> manufacturerName;
+
     private Photo photo;
 }

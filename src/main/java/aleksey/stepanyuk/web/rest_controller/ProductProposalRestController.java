@@ -4,6 +4,7 @@ import aleksey.stepanyuk.domain.entity.ProductProposal;
 import aleksey.stepanyuk.service.product_proposal.ProductProposalService;
 import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForEditDto;
 import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForListDto;
+import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,11 @@ public class ProductProposalRestController {
     @GetMapping("/read/{id}")
     public ResponseEntity<ProdPropForEditDto> readProductProposal(@PathVariable Long id) {
         return ResponseEntity.ok(productProposalService.read(id));
+    }
+
+    @GetMapping("/read/product_id/{id}")
+    public ResponseEntity<List<ProdPropForOrderDto>> readByProdId(@PathVariable Long id) {
+        return ResponseEntity.ok(productProposalService.readByProdId(id));
     }
 
     @DeleteMapping("/delete/{id}")

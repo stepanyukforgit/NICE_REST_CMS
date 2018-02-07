@@ -3,6 +3,7 @@ package aleksey.stepanyuk.service.product_proposal;
 import aleksey.stepanyuk.domain.entity.ProductProposal;
 import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForEditDto;
 import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForListDto;
+import aleksey.stepanyuk.service.product_proposal.dto.ProdPropForOrderDto;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface ProductProposalService {
     void delete(Long id);
 
     List<ProdPropForListDto> productProposalList();
+
+    List<ProdPropForOrderDto> readByProdId(Long id);
 }
