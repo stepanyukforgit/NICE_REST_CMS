@@ -2,6 +2,7 @@ package aleksey.stepanyuk.web.rest_controller;
 
 import aleksey.stepanyuk.domain.entity.Order;
 import aleksey.stepanyuk.service.order.OrderService;
+import aleksey.stepanyuk.service.order.dto.OrderForListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +24,14 @@ public class OrderRestController {
         return ResponseEntity.ok(orderService.saveProdIdNull(order));
     }
 
-    //todo add PUT
+    @PutMapping("/save")
+    public ResponseEntity<Order> saveOrder(@RequestBody Order order) {
+        return ResponseEntity.ok(orderService.save(order));
+    }
 
     @GetMapping("/read/{id}")
     public ResponseEntity<Order> readOrder(@PathVariable Long id) {
-        Order order = orderService.read(id);
-        return ResponseEntity.ok(order);
+        return ResponseEntity.ok(orderService.read(id));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -38,7 +41,7 @@ public class OrderRestController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Order>> orderList() {
+    public ResponseEntity<List<OrderForListDto>> orderList() {
         return ResponseEntity.ok(orderService.orderList());
     }
 }

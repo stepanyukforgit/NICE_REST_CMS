@@ -1,6 +1,7 @@
 package aleksey.stepanyuk.service.order;
 
 import aleksey.stepanyuk.domain.entity.Order;
+import aleksey.stepanyuk.service.order.dto.OrderForListDto;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface OrderService {
 
     void delete(Long id);
 
-    List<Order> orderList();
+    List<OrderForListDto> orderList();
 }

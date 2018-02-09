@@ -15,8 +15,8 @@ public class Customer {
     @Column(name = "cust_address", columnDefinition = "VARCHAR(200)", nullable = false)
     private String custAddress;
 
-    @Column(name = "cust_phone", columnDefinition = "CHAR(15)", nullable = false)
-    private String custPhone;
+    @Column(name = "cust_phone", columnDefinition = "BIGINT", nullable = false)
+    private Long custPhone;
 
     @Column(name = "cust_email", columnDefinition = "VARCHAR(30)")
     private String custEmail;
