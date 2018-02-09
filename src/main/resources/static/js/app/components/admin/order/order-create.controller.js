@@ -82,7 +82,7 @@ angular.module('order')
                     if (curr && curr.proposal) {
                         sum += curr.quantity * (curr.proposal.price - (curr.proposal.price * (curr.proposal.sale / 100)));
                     }
-                    return sum.toFixed(2);;
+                    return Math.round(sum);
                 }
                 , 0);
         };

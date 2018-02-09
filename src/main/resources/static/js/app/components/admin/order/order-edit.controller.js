@@ -89,7 +89,7 @@ angular.module('order')
                     if (curr) {
                         sum += curr.quantity * (curr.price - (curr.price * (curr.sale / 100)));
                     }
-                    return sum.toFixed(2);
+                    return Math.round(sum);
                 }
                 , 0);
 
